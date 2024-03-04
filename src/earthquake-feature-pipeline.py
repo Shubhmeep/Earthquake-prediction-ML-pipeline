@@ -10,6 +10,7 @@ from great_expectations.core import ExpectationSuite, ExpectationConfiguration
 project = hopsworks.login()
 fs = project.get_feature_store()
 
+
 # loading the env variables
 load_dotenv()
 HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
@@ -18,6 +19,7 @@ CLEANED_S3_BUCKET_NAME = os.getenv("CLEANED_S3_BUCKET_NAME")
 AWS_REGION=os.getenv("AWS_REGION")
 AWS_KEY=os.getenv("AWS_KEY")
 AWS_SECRET_KEY=os.getenv("AWS_SECRET_KEY")
+VERSION=os.getenv("VERSION")
 
 # defining the s3 client 
 s3 = boto3.client(
@@ -58,27 +60,20 @@ expectation_suite.add_expectation(
     )
 )
 
-for column in df.columns:
-    if column != 'reviewed':
-        expectation_suite.add_expectation(
-            ExpectationConfiguration(
-                expectation_type="expect_column_values_to_be_of_type",
-                kwargs={
-                    "column": column,
-                    "type_": "float"
-                }
-            )
-        )
-
 
 # Get or create the 'earthquake_data_for_training' feature group
 
 earthquake_data_for_training = fs.get_or_create_feature_group(
     name="earthquake_data_for_training",
+    version=VERSION,
+    primary_key=["latitude", "longitude", "depth", "deptherror","rms", "mag", "reviewed"],
     description="earthquake data for building models",
-    expectation_suite=expectation_suite,
-    validation_ingestion_policy="STRICT"
+    expectation_suite=expectation_suite
 )
+
+
+earthquake_data_for_training.save_expectation_suite(expectation_suite = expectation_suite,
+                                                    validation_ingestion_policy = "STRICT")
 
 earthquake_data_for_training.insert(df)
 
