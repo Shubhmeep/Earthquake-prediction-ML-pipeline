@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import boto3
 import pandas as pd
 from io import StringIO
+import great_expectations as ge
+from great_expectations.core import ExpectationSuite, ExpectationConfiguration
 
 project = hopsworks.login()
 fs = project.get_feature_store()
@@ -31,13 +33,51 @@ csv_data = response['Body'].read().decode('utf-8')
 df = pd.read_csv(StringIO(csv_data))
 
 # greatExpectations feature testing
+greatExpectationDf = ge.from_pandas(df)
+expectation_suite = greatExpectationDf.get_expectation_suite()
+max_magnitude = 10.0
+expectation_suite.expectation_suite_name = "earthquakeDataCheck"
 
+expectation_suite.add_expectation(
+    ExpectationConfiguration(
+        expectation_type="expect_column_distinct_values_to_be_in_set",
+        kwargs={
+            "column": "reviewed",
+            "value_set": [0, 1]
+        }
+    )  
+)
+
+expectation_suite.add_expectation(
+    ExpectationConfiguration(
+        expectation_type="expect_column_max_to_be_between",
+        kwargs={
+            "column": "mag",
+            "max_value": max_magnitude
+        }
+    )
+)
+
+for column in df.columns:
+    if column != 'reviewed':
+        expectation_suite.add_expectation(
+            ExpectationConfiguration(
+                expectation_type="expect_column_values_to_be_of_type",
+                kwargs={
+                    "column": column,
+                    "type_": "float"
+                }
+            )
+        )
 
 
 # Get or create the 'earthquake_data_for_training' feature group
+
 earthquake_data_for_training = fs.get_or_create_feature_group(
     name="earthquake_data_for_training",
-    description="earthquake data for building models"
+    description="earthquake data for building models",
+    expectation_suite=expectation_suite,
+    validation_ingestion_policy="STRICT"
 )
 
 earthquake_data_for_training.insert(df)
