@@ -1,0 +1,24 @@
+boto3
+furl
+mock
+numpy
+pandas
+pyhumps==1.6.1
+pyjks
+requests
+tqdm
+
+[dev]
+black
+flake8
+pytest
+
+[docs]
+keras_autodoc@ git+https://git@github.com/logicalclocks/keras-autodoc@split-tags-properties
+markdown-include
+markdown==3.3.7
+mike==1.1.2
+mkdocs-material==8.2.8
+mkdocs==1.3.0
+pymdown-extensions
+sphinx==3.5.4
