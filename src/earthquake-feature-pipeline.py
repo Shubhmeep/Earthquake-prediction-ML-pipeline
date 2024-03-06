@@ -79,3 +79,5 @@ earthquake_data_for_training.insert(df)
 
 
 
+
+
