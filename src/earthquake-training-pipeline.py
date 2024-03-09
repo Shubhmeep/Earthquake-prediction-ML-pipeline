@@ -139,10 +139,11 @@ model = mr.python.create_model(
 # Save the model to the specified directory
 model.save(mojo_dir)
 
+print(best_model)
 
 h2o.cluster().shutdown()
 
-
+# remove the images from local directory
 directory_to_delete = "model_evaluation"
 
 if os.path.exists(directory_to_delete):
