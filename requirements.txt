@@ -62,7 +62,7 @@ kaleido==0.2.1
 kiwisolver==1.4.5
 lightgbm==4.3.0
 llvmlite==0.42.0
-MarkupSafe==2.1.5
+MarkupSafe==2.0.1
 matplotlib==3.7.5
 matplotlib-inline==0.1.6
 mistune==3.0.2
