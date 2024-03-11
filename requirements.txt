@@ -1,3 +1,4 @@
+Flask==2.2.5
 altair==4.2.2
 asttokens==2.4.1
 attrs==23.2.0
@@ -30,12 +31,11 @@ exceptiongroup==1.2.0
 executing==2.0.1
 fastavro==1.8.2
 fastjsonschema==2.19.1
-Flask==2.2.5
 fonttools==4.49.0
 fsspec==2024.2.0
 furl==2.1.3
 future==1.0.0
-great-expectations==0.14.13
+great-expectations==0.17.12
 greenlet==3.0.3
 h2o==3.44.0.3
 hopsworks==3.4.4
