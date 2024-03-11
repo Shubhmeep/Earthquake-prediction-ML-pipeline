@@ -46,5 +46,12 @@ jobs:
   
 
       - name: Running Inference pipeline
+        env: 
+          HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+          CLEANED_CSV_FILE_NAME: ${{secrets.CLEANED_CSV_FILE_NAME}}
+          CLEANED_S3_BUCKET_NAME: ${{secrets.CLEANED_S3_BUCKET_NAME}}
+          AWS_REGION: ${{secrets.AWS_REGION}}
+          AWS_KEY: ${{secrets.AWS_KEY}}
+          AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
         run: |
           python3 ./src/earthquake-inference-endpoint.py
