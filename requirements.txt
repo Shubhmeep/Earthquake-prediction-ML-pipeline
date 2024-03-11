@@ -30,7 +30,7 @@ exceptiongroup==1.2.0
 executing==2.0.1
 fastavro==1.8.2
 fastjsonschema==2.19.1
-Flask==2.3.0
+Flask==2.2.5
 fonttools==4.49.0
 fsspec==2024.2.0
 furl==2.1.3
