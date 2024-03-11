@@ -19,7 +19,7 @@ CLEANED_S3_BUCKET_NAME = os.getenv("CLEANED_S3_BUCKET_NAME")
 AWS_REGION=os.getenv("AWS_REGION")
 AWS_KEY=os.getenv("AWS_KEY")
 AWS_SECRET_KEY=os.getenv("AWS_SECRET_KEY")
-VERSION=os.getenv("VERSION")
+VERSION=3
 
 # defining the s3 client 
 s3 = boto3.client(

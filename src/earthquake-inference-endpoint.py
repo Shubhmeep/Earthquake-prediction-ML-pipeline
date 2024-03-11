@@ -25,6 +25,7 @@ def predict():
         return jsonify(predictions=predictions_list)
     except Exception as e:
         return jsonify(error=str(e))
+ 
 
 loaded_model = load_model()
 
