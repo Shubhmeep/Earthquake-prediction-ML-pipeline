@@ -1,11 +1,11 @@
 Flask
-hopsworks==3.4
+hopsworks==3.4.2
 boto3
 pandas
 great-expectations
 numpy
 h2o
-hsfs==3.0.9
+hsfs==3.4.2
 hsml
 matplotlib
 scikit-learn
