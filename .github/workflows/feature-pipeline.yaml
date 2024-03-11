@@ -22,7 +22,7 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install -r ./requirements.txt
 
-      - name: execute python workflows from bash script
+      - name: Running Feature pipeline
         env: 
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
           CLEANED_CSV_FILE_NAME: ${{secrets.CLEANED_CSV_FILE_NAME}}
@@ -32,3 +32,11 @@ jobs:
           AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
         run: |
           python3 ./src/earthquake-feature-pipeline.py
+
+      - name: Running training pipeline
+        run: |
+          python3 ./src/earthquake-training-pipeline.py
+
+      - name: Running Inference pipeline
+        run: |
+          python3 ./src/earthquake-inference-endpoint.py
