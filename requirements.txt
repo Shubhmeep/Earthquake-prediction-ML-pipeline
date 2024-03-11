@@ -10,4 +10,4 @@ hsml
 matplotlib
 scikit-learn
 python-dotenv
-
+gunicorn
