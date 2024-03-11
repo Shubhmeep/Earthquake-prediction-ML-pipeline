@@ -13,10 +13,12 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import shutil
 from dotenv import load_dotenv
 
-load_dotenv()
-HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
+
 project = hopsworks.login()
 fs = project.get_feature_store()
+
+load_dotenv()
+HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
 
 print('CONNECTED TO HOPSWORKS ACCOUNT !')
 

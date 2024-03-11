@@ -36,6 +36,7 @@ jobs:
       - name: Running training pipeline
         run: |
           python3 ./src/earthquake-training-pipeline.py
+  
 
       - name: Running Inference pipeline
         run: |
