@@ -29,6 +29,5 @@ def predict():
 
 loaded_model = load_model()
 
-if __name__ == '__main__':
-    app.run(debug=True)
-    h2o.cluster().shutdown()
+
+  
