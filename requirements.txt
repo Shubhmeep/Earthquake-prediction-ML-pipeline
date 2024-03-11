@@ -1,5 +1,5 @@
 Flask
-hopsworks==3.4.0
+hopsworks==3.4.2
 boto3
 pandas
 great-expectations
