@@ -11,8 +11,10 @@ import h2o
 from h2o.estimators import H2OGeneralizedLinearEstimator, H2ORandomForestEstimator, H2OGradientBoostingEstimator, H2ODeepLearningEstimator
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import shutil
+from dotenv import load_dotenv
 
-
+load_dotenv()
+HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
 project = hopsworks.login()
 fs = project.get_feature_store()
 
@@ -24,9 +26,9 @@ mojo_dir = "model_evaluation"
 
 # creating a feature view
 try: 
-    feature_view = fs.get_feature_view(name="earthquake_data_for_training", version=None, labels=["mag"])
+    feature_view = fs.get_feature_view(name="earthquake_data_for_training", version=1, labels=["mag"])
 except:
-    earthquakes_fg = fs.get_feature_group(name="earthquake_data_for_training", version=None)
+    earthquakes_fg = fs.get_feature_group(name="earthquake_data_for_training", version=1)
     query = earthquakes_fg.select_all()
     feature_view = fs.get_or_create_feature_view(name="earthquake_data_for_training", version=1, labels=["mag"], query=query)
 
