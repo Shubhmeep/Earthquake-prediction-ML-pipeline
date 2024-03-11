@@ -24,9 +24,9 @@ mojo_dir = "model_evaluation"
 
 # creating a feature view
 try: 
-    feature_view = fs.get_feature_view(name="earthquake_data_for_training", version=1, labels=["mag"])
+    feature_view = fs.get_feature_view(name="earthquake_data_for_training", version=None, labels=["mag"])
 except:
-    earthquakes_fg = fs.get_feature_group(name="earthquake_data_for_training", version=1)
+    earthquakes_fg = fs.get_feature_group(name="earthquake_data_for_training", version=None)
     query = earthquakes_fg.select_all()
     feature_view = fs.get_or_create_feature_view(name="earthquake_data_for_training", version=1, labels=["mag"], query=query)
 
