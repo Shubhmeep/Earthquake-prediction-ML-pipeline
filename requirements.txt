@@ -5,7 +5,7 @@ pandas
 great-expectations
 numpy
 h2o
-hsfs==3.0.9
+hsfs==3.4.2
 hsml
 matplotlib
 scikit-learn
